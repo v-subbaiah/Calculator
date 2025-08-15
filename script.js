@@ -1,17 +1,36 @@
-function append(value)
-        {
-            document.getElementById("display").value+=value;
-        }
-        function clearDisplay()
-        {
-            document.getElementById("display").value='';
-        }
-        function calculate()
-        {
-            try{
-    const result=eval(document.getElementById("display").value);
-            document.getElementById("display").value=result;
-            }
-            catch{
-                document.getElementById("display").value="ERROR";            }
-        }
+  function addTask() {
+      const input = document.getElementById("taskInput");
+      const taskText = input.value.trim();
+
+      if (taskText === "") { alert("Please enter a task."); return; }
+
+      const li = document.createElement("li");
+
+      const taskSpan = document.createElement("span");
+      taskSpan.textContent = taskText;
+
+      const btnGroup = document.createElement("div");
+      btnGroup.className = "btn-group";
+
+      const completeBtn = document.createElement("button");
+      completeBtn.textContent = "Complete";
+      completeBtn.className = "complete-btn";
+      completeBtn.addEventListener("click", () => {
+        li.classList.toggle("completed");
+      });
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.className = "delete-btn";
+      deleteBtn.addEventListener("click", () => {
+        li.remove();
+      });
+      btnGroup.appendChild(completeBtn);
+      btnGroup.appendChild(deleteBtn);
+      li.appendChild(taskSpan);
+      li.appendChild(btnGroup);
+
+      document.getElementById("taskList").appendChild(li);
+      input.value = "";
+    }
+  
